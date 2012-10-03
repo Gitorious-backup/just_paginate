@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 module JustPaginate
 
-  VERSION = "0.0.4"
+  VERSION = "0.0.5"
 
   def self.page_value(page)
     if page.nil?
@@ -13,9 +13,13 @@ module JustPaginate
 
   def self.paginate(curr_page, per_page, total_entry_count,  &selection_strategy)
     raise "Pagination just supplies index range, expects a selection strategy" if selection_strategy.nil? 
-    total_page_number = total_entry_count / per_page
+    
     entries = yield(index_range(curr_page, per_page, total_entry_count)) || []    
-    return entries, total_page_number
+    return entries, total_page_number(total_entry_count, per_page)
+  end
+
+  def self.total_page_number(total_entry_count, per_page)
+    total_entry_count / per_page
   end
   
   def self.index_range(curr_page, per_page, total_entry_count)
@@ -27,7 +31,7 @@ module JustPaginate
     end
     
     if end_index>total_entry_count
-      end_index=(total_entry_count-1)
+      end_index = total_entry_count
     end
     
     Range.new(start_index, end_index)

@@ -26,7 +26,14 @@ class JustPaginateTest < Test::Unit::TestCase
         JustPaginate.index_range(7,2,4)
       end
     end
-    
+  
+    should "calculate correct total page count" do
+      assert_equal 25, JustPaginate.total_page_number(500, 20)
+      
+
+    end
+
+  
     should "correctly apply the supplied selection strategy" do
       ran = false
       sliced_entries, page_count = JustPaginate.paginate(1, 5, 10) do |index_range|
@@ -53,7 +60,10 @@ class JustPaginateTest < Test::Unit::TestCase
       assert_equal 60..79, JustPaginate.index_range(4,20,100)
       assert_equal 60..79, JustPaginate.index_range(4,20,95)
       assert_equal 80..99, JustPaginate.index_range(5,20,100)
-      assert_equal 80..94, JustPaginate.index_range(5,20,95)
+      assert_equal 80..95, JustPaginate.index_range(5,20,95)
+
+      assert_equal 460..479, JustPaginate.index_range(24,20,500)
+      assert_equal 480..499, JustPaginate.index_range(25,20,500)
     end
   end
   
