@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 module JustPaginate
 
-  VERSION = "0.0.2"
+  VERSION = "0.0.3"
 
   def self.page_value(page)
     if page.nil?
