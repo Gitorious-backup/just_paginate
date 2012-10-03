@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 module JustPaginate
 
   VERSION = "0.0.2"
@@ -34,27 +35,46 @@ module JustPaginate
 
   def self.page_navigation(curr_page, total_page_count, &page_link_constructor)   
     links = page_links(curr_page.to_i, total_page_count, &page_link_constructor)
-    return "<style>.pagelink{font-size: 20px; margin-right: 5px;}</style><center>#{links}</center>"
+    return "<div class='pagination'>#{links}</div>"
   end
+
+# Create gitorous-style-pagination until we move to Bootstrap
+# <div class="pagination">
+# <a href="/projects?page=24" class="prev_page" rel="prev">Previous</a> 
+# <a href="/projects?page=1" rel="start">1</a> 
+# <span class="gap">…</span> 
+# <a href="/projects?page=21">21</a> 
+# <a href="/projects?page=22">22</a> 
+# <a href="/projects?page=23">23</a> 
+# <a href="/projects?page=24" rel="prev">24</a> <span class="current">25</span> 
+# <a href="/projects?page=26" rel="next">26</a> 
+# <a href="/projects?page=27">27</a> 
+# <a href="/projects?page=28">28</a> 
+# <a href="/projects?page=29">29</a> 
+# <span class="gap">…</span> 
+# <a href="/projects?page=1446">1446</a> 
+# <a href="/projects?page=26" class="next_page" rel="next">Next</a>
+# </div>
+
 
   def self.page_links(curr_page, total_page_count, &page_link_constructor)
     page_labels(curr_page, total_page_count).map do |label|
       page_element = ""
       
       if label == "..."
-        page_element = "<span class='pagelink'>#{label}</span>"
+        page_element = "<span class='gap'>#{label}</span>"
       elsif label == "<"
         page_url = yield(curr_page-1)
-        page_element = "<a class='pagelink' href='#{page_url}'>#{label}</a>"
+        page_element = "<a class='prev_page' rel='prev' href='#{page_url}'>#{label}</a>"
       elsif label == ">"
         page_url = yield(curr_page+1)
-        page_element = "<a class='pagelink' href='#{page_url}'>#{label}</a>"
+        page_element = "<a class='next_page' rel='next' href='#{page_url}'>#{label}</a>"
       else
         page_url = yield(label)
         if label.to_i == curr_page
-          page_element = "<span class='pagelink'>#{label}</span>"
+          page_element = "<span class='current'>#{label}</span>"
         else
-          page_element = "<a class='pagelink' href='#{page_url}'>#{label}</a>"
+          page_element = "<a href='#{page_url}'>#{label}</a>"
         end
       end
 
