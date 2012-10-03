@@ -8,8 +8,8 @@ Gem::Specification.new do |s|
   s.authors     = ["Gitorious AS"]
   s.email       = ["support@gitorious.org"]
   s.homepage    = "https://gitorious.org/gitorious/just_paginate"
-  s.summary     = %q{Framework-agnostic support for paginating collections and creating html navigation to the result}
-  s.description = %q{Framework-agnostic support for paginating collections and creating html navigation to the result}
+  s.summary     = %q{Framework-agnostic support for paginating collections of things, and linking to paginated things in your webpage}
+  s.description = %q{Framework-agnostic support for paginating collections of things, and linking to paginated things in your webpage}
 
   s.rubyforge_project = "just_paginate"
 
