@@ -98,7 +98,7 @@ module JustPaginate
         current = (total-max_visible)+1
       end
 
-      current.upto(current+(max_visible)).each {|n| labels.push(n.to_s)}
+      current.upto(current+(max_visible-1)).each {|n| labels.push(n.to_s)}
 
       if (current <= (total-max_visible))
         labels.concat ["...", "#{total}", ">"]
