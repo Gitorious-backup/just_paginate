@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 module JustPaginate
 
-  VERSION = "0.0.6"
+  VERSION = "0.0.7"
 
   def self.page_value(page)
     if page.nil?
@@ -69,10 +69,10 @@ module JustPaginate
         page_element = "<span class='gap'>#{label}</span>"
       elsif label == "<"
         page_url = yield(curr_page-1)
-        page_element = "<a class='prev_page' rel='prev' href='#{page_url}'>#{label}</a>"
+        page_element = "<a rel='prev' href='#{page_url}'>#{label}</a>"
       elsif label == ">"
         page_url = yield(curr_page+1)
-        page_element = "<a class='next_page' rel='next' href='#{page_url}'>#{label}</a>"
+        page_element = "<a rel='next' href='#{page_url}'>#{label}</a>"
       else
         page_url = yield(label)
         if label.to_i == curr_page
