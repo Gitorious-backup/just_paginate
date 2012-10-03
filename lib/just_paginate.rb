@@ -1,7 +1,6 @@
-require "just_paginate/version"
-require "just_paginate/common"
-
 module JustPaginate
+
+  VERSION = "0.0.2"
 
   def self.page_value(page)
     if page.nil?
@@ -39,7 +38,7 @@ module JustPaginate
   end
 
   def self.page_links(curr_page, total_page_count, &page_link_constructor)
-    page_labels(curr_page, total_page_count).map do |label|        
+    page_labels(curr_page, total_page_count).map do |label|
       page_element = ""
       
       if label == "..."
