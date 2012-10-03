@@ -37,16 +37,19 @@ Say we have a Rails app, with an index page of paginated Projects. You
 could do this in the controller, to select the 20 projects for the
 current page:
 
+```ruby
 @page = JustPaginate.page_value(params[:page])
 @project_count = Project.count
 @projects, @total_pages = JustPaginate.paginate(@page, 20, @project_count) do |index_range|
   Project.all.slice(index_range)
 end
+```
 
 And in the index.html.erb file, to generate the page navigation:
 
+```ruby
 <%= JustPaginate.page_navigation(@page, @total_pages) { |page_no| "/projects/?page=#{page_no}" } -%>
-
+```
 
 INSTALL:
 ========
