@@ -29,10 +29,8 @@ class JustPaginateTest < Test::Unit::TestCase
   
     should "calculate correct total page count" do
       assert_equal 25, JustPaginate.total_page_number(500, 20)
-      
-
+      assert_equal 25, JustPaginate.total_page_number(498, 20)
     end
-
   
     should "correctly apply the supplied selection strategy" do
       ran = false
@@ -89,6 +87,9 @@ class JustPaginateTest < Test::Unit::TestCase
       assert_correct_paging_labels "< 1 ... 41 42 43 44 45 46 47 48 49 50", 41, 50
       assert_correct_paging_labels "< 1 ... 41 42 43 44 45 46 47 48 49 50", 45, 50
       assert_correct_paging_labels "< 1 ... 41 42 43 44 45 46 47 48 49 50", 50, 50
+
+      assert_correct_paging_labels "< 1 ... 16 17 18 19 20 21 22 23 24 25", 24, 25
+      assert_correct_paging_labels "< 1 ... 16 17 18 19 20 21 22 23 24 25", 25, 25
     end
   end
 

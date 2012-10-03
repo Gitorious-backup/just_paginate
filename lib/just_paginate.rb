@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 module JustPaginate
 
-  VERSION = "0.0.5"
+  VERSION = "0.0.6"
 
   def self.page_value(page)
     if page.nil?
@@ -19,7 +19,7 @@ module JustPaginate
   end
 
   def self.total_page_number(total_entry_count, per_page)
-    total_entry_count / per_page
+    (total_entry_count.to_f / per_page).ceil
   end
   
   def self.index_range(curr_page, per_page, total_entry_count)
