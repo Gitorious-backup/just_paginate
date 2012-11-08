@@ -1,8 +1,8 @@
 require File.dirname(__FILE__) + '/test_helper.rb'
 
 class JustPaginateTest < Test::Unit::TestCase
-  
-  context "The backend pagination function" do    
+
+  context "The backend pagination function" do
     should "basically work like this" do
       paged_collection = [1,2,3,4,5,6,7,8,9,10]
 
@@ -26,12 +26,18 @@ class JustPaginateTest < Test::Unit::TestCase
         JustPaginate.index_range(7,2,4)
       end
     end
-  
+
+    should "provide predicate to check if pagination would exceed total pagecount" do
+      assert JustPaginate.beyond_page_range?(7,2,4)
+      assert !JustPaginate.beyond_page_range?(1,20,100)
+    end
+
+
     should "calculate correct total page count" do
       assert_equal 25, JustPaginate.total_page_number(500, 20)
       assert_equal 25, JustPaginate.total_page_number(498, 20)
     end
-  
+
     should "correctly apply the supplied selection strategy" do
       ran = false
       sliced_entries, page_count = JustPaginate.paginate(1, 5, 10) do |index_range|
@@ -41,7 +47,7 @@ class JustPaginateTest < Test::Unit::TestCase
       end
       assert ran, "selection block didn't run"
     end
-    
+
     should "calculate correct index ranges" do
       assert_equal 0..1, JustPaginate.index_range(1,2,4)
       assert_equal 2..3, JustPaginate.index_range(2,2,4)
@@ -64,7 +70,7 @@ class JustPaginateTest < Test::Unit::TestCase
       assert_equal 480..499, JustPaginate.index_range(25,20,500)
     end
   end
-  
+
   context "The frontend pagination html helper" do
     should "basically work like this" do
       generated = JustPaginate.page_navigation(1, 10) { |page_no| "/projects/index?page=#{page_no}" }
