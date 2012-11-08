@@ -21,17 +21,10 @@ class JustPaginateTest < Test::Unit::TestCase
       end
     end
 
-    should "complain if given page extends past collection bounds" do
-      assert_raises RuntimeError do
-        JustPaginate.index_range(7,2,4)
-      end
-    end
-
     should "provide predicate to check if pagination would exceed total pagecount" do
       assert JustPaginate.beyond_page_range?(7,2,4)
       assert !JustPaginate.beyond_page_range?(1,20,100)
     end
-
 
     should "calculate correct total page count" do
       assert_equal 25, JustPaginate.total_page_number(500, 20)
@@ -69,6 +62,12 @@ class JustPaginateTest < Test::Unit::TestCase
       assert_equal 460..479, JustPaginate.index_range(24,20,500)
       assert_equal 480..499, JustPaginate.index_range(25,20,500)
     end
+  end
+
+  should "just fall back to largest possible page if given page extends past collection bounds" do
+    assert_equal 2..3, JustPaginate.index_range(2,2,4)
+    assert_equal 2..3, JustPaginate.index_range(3,2,4)
+    assert_equal 2..3, JustPaginate.index_range(4,2,4)
   end
 
   context "The frontend pagination html helper" do

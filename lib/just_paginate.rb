@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 module JustPaginate
 
-  VERSION = "0.0.8"
+  VERSION = "0.0.9"
 
   def self.page_value(page)
     if page.nil?
@@ -26,8 +26,9 @@ module JustPaginate
     start_index = ((curr_page-1)*per_page)
     end_index = (start_index+per_page)-1
 
-    if(start_index>total_entry_count)
-      raise "Pagination is out of bounds, beyond total entry size"
+    if(start_index>(total_entry_count-1))
+      start_index = total_entry_count-per_page
+      end_index = total_entry_count-1
     end
 
     if end_index>total_entry_count
