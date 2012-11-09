@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
 module JustPaginate
 
-  VERSION = "0.0.9"
+  VERSION = "0.0.10"
 
+  # TODO make sure negative numbers, non-integers etc are just converted to page 1.
   def self.page_value(page)
     if page.nil?
       1
@@ -100,4 +101,9 @@ module JustPaginate
     return labels
   end
 
+  module Rails
+    def self.warn_on_oob(requested_page, per_page, total_element_count)
+      flash[:error] = "Page #{@page} out of bounds." if JustPaginate.beyond_page_range?(requested_page, per_page, total_element_count)
+    end
+  end
 end
