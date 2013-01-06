@@ -39,7 +39,7 @@ module JustPaginate
     Range.new(start_index, end_index)
   end
 
-  def self.beyond_page_range?(curr_page, per_page, total_entry_count)
+  def self.page_out_of_bounds?(curr_page, per_page, total_entry_count)
     if curr_page < 1
       true
     else
@@ -105,9 +105,4 @@ module JustPaginate
     return labels
   end
 
-  module Rails
-    def warn_on_oob(requested_page, per_page, total_element_count)
-      flash[:error] = "Page #{@page} out of bounds." if JustPaginate.beyond_page_range?(requested_page, per_page, total_element_count)
-    end
-  end
 end

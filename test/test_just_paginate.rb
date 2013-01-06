@@ -22,14 +22,14 @@ class JustPaginateTest < Test::Unit::TestCase
     end
 
     should "provide predicate to check if pagination would exceed total pagecount" do
-      assert JustPaginate.beyond_page_range?(7,2,4)
-      assert !JustPaginate.beyond_page_range?(1,20,100)
+      assert JustPaginate.page_out_of_bounds?(7,2,4)
+      assert !JustPaginate.page_out_of_bounds?(1,20,100)
     end
 
     should "state that pages below page 1 are out of bounds" do
-      assert JustPaginate.beyond_page_range?(-2,2,4)
-      assert JustPaginate.beyond_page_range?(-1,2,4)
-      assert JustPaginate.beyond_page_range?(0,2,4)
+      assert JustPaginate.page_out_of_bounds?(-2,2,4)
+      assert JustPaginate.page_out_of_bounds?(-1,2,4)
+      assert JustPaginate.page_out_of_bounds?(0,2,4)
     end
 
     should "calculate correct total page count" do
