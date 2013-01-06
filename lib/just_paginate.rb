@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 module JustPaginate
 
-  VERSION = "0.0.10"
+  VERSION = "0.0.11"
 
   # TODO make sure negative numbers, non-integers etc are just converted to page 1.
   def self.page_value(page)
