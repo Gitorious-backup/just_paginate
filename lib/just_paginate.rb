@@ -102,7 +102,7 @@ module JustPaginate
   end
 
   module Rails
-    def self.warn_on_oob(requested_page, per_page, total_element_count)
+    def warn_on_oob(requested_page, per_page, total_element_count)
       flash[:error] = "Page #{@page} out of bounds." if JustPaginate.beyond_page_range?(requested_page, per_page, total_element_count)
     end
   end
