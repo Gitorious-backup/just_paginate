@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 module JustPaginate
 
-  VERSION = "0.0.11"
+  VERSION = "0.0.12"
 
   # TODO make sure negative numbers, non-integers etc are just converted to page 1.
   def self.page_value(page)
@@ -40,9 +40,13 @@ module JustPaginate
   end
 
   def self.beyond_page_range?(curr_page, per_page, total_entry_count)
-    start_index = ((curr_page-1)*per_page)
-    end_index = (start_index+per_page)-1
-    start_index > total_entry_count
+    if curr_page < 1
+      true
+    else
+      start_index = ((curr_page-1)*per_page)
+      end_index = (start_index+per_page)-1
+      start_index > total_entry_count
+    end
   end
 
   def self.page_navigation(curr_page, total_page_count, &page_link_constructor)

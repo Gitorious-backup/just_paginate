@@ -26,6 +26,12 @@ class JustPaginateTest < Test::Unit::TestCase
       assert !JustPaginate.beyond_page_range?(1,20,100)
     end
 
+    should "state that pages below page 1 are out of bounds" do
+      assert JustPaginate.beyond_page_range?(-2,2,4)
+      assert JustPaginate.beyond_page_range?(-1,2,4)
+      assert JustPaginate.beyond_page_range?(0,2,4)
+    end
+
     should "calculate correct total page count" do
       assert_equal 25, JustPaginate.total_page_number(500, 20)
       assert_equal 25, JustPaginate.total_page_number(498, 20)
