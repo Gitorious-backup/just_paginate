@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 module JustPaginate
 
-  VERSION = "0.0.13"
+  VERSION = "0.0.14"
 
   # TODO make sure negative numbers, non-integers etc are just converted to page 1.
   def self.page_value(page)
@@ -51,7 +51,7 @@ module JustPaginate
 
   def self.page_navigation(curr_page, total_page_count, &page_link_constructor)
     links = page_links(curr_page.to_i, total_page_count, &page_link_constructor)
-    return "<div class='pagination'>#{links}</div>"
+    return "<div class='pagination'><ul>#{links}</ul></div>"
   end
 
   def self.page_links(curr_page, total_page_count, &page_link_constructor)
@@ -59,7 +59,7 @@ module JustPaginate
       page_element = ""
 
       if label == "..."
-        page_element = "<span class='gap'>#{label}</span>"
+        page_element = "<a class='disabled'>#{label}</span>"
       elsif label == "<"
         page_url = yield(curr_page-1)
         page_element = "<a rel='prev' href='#{page_url}'>#{label}</a>"
@@ -69,7 +69,7 @@ module JustPaginate
       else
         page_url = yield(label)
         if label.to_i == curr_page
-          page_element = "<span class='current'>#{label}</span>"
+          page_element = "<a class='active'>#{label}</span>"
         else
           page_element = "<a href='#{page_url}'>#{label}</a>"
         end
