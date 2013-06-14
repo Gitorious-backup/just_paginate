@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 module JustPaginate
 
-  VERSION = "0.0.15"
+  VERSION = "0.0.16"
 
   # TODO make sure negative numbers, non-integers etc are just converted to page 1.
   def self.page_value(page)
@@ -59,7 +59,7 @@ module JustPaginate
       page_element = ""
 
       if label == "..."
-        page_element = "<li><a class='disabled'>#{label}</a></li>"
+        page_element = "<li class='disabled'><a>#{label}</a></li>"
       elsif label == "<"
         page_url = yield(curr_page-1)
         page_element = "<li><a rel='prev' href='#{page_url}'>#{label}</a></li>"
@@ -69,7 +69,7 @@ module JustPaginate
       else
         page_url = yield(label)
         if label.to_i == curr_page
-          page_element = "<li><a class='active'>#{label}</a></li>"
+          page_element = "<li class='active'><a>#{label}</a></li>"
         else
           page_element = "<li><a href='#{page_url}'>#{label}</a></li>"
         end
