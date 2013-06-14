@@ -59,19 +59,19 @@ module JustPaginate
       page_element = ""
 
       if label == "..."
-        page_element = "<a class='disabled'>#{label}</span>"
+        page_element = "<li><a class='disabled'>#{label}</a></li>"
       elsif label == "<"
         page_url = yield(curr_page-1)
-        page_element = "<a rel='prev' href='#{page_url}'>#{label}</a>"
+        page_element = "<li><a rel='prev' href='#{page_url}'>#{label}</a></li>"
       elsif label == ">"
         page_url = yield(curr_page+1)
-        page_element = "<a rel='next' href='#{page_url}'>#{label}</a>"
+        page_element = "<li><a rel='next' href='#{page_url}'>#{label}</a></li>"
       else
         page_url = yield(label)
         if label.to_i == curr_page
-          page_element = "<a class='active'>#{label}</span>"
+          page_element = "<li><a class='active'>#{label}</a></li>"
         else
-          page_element = "<a href='#{page_url}'>#{label}</a>"
+          page_element = "<li><a href='#{page_url}'>#{label}</a></li>"
         end
       end
 
