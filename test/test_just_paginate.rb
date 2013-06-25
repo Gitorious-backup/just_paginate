@@ -87,6 +87,13 @@ class JustPaginateTest < Test::Unit::TestCase
     end
 
     should "do page nav labels, truncation and quicklinks correctly" do
+      assert_correct_paging_labels "", 0, 0
+      assert_correct_paging_labels "", 1, 0
+      assert_correct_paging_labels "", 2, 0
+
+      assert_correct_paging_labels "1", 1, 1
+      assert_correct_paging_labels "1 2", 1, 2
+
       assert_correct_paging_labels "1 2 3 4 5 6 7 8 9 10", 1, 10
 
       assert_correct_paging_labels "1 2 3 4 5 6 7 8 9 10 ... 50 >", 1, 50
