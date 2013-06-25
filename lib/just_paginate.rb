@@ -55,7 +55,11 @@ module JustPaginate
 
   def self.page_navigation(curr_page, total_page_count, &page_link_constructor)
     links = page_links(curr_page.to_i, total_page_count, &page_link_constructor)
-    return "<div class='pagination'><ul>#{links}</ul></div>"
+    if total_page_count > 1
+      "<div class='pagination'><ul>#{links}</ul></div>"
+    else
+      ""
+    end
   end
 
   def self.page_links(curr_page, total_page_count, &page_link_constructor)
