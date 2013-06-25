@@ -76,6 +76,10 @@ class JustPaginateTest < Test::Unit::TestCase
     assert_equal 2..3, JustPaginate.index_range(4,2,4)
   end
 
+  should "return 0-0 range for empty collection" do
+     assert_equal 0..0, JustPaginate.index_range(2,2,0)
+  end
+
   context "The frontend pagination html helper" do
     should "basically work like this" do
       generated = JustPaginate.page_navigation(1, 10) { |page_no| "/projects/index?page=#{page_no}" }

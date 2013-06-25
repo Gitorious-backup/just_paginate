@@ -27,6 +27,10 @@ module JustPaginate
     start_index = ((curr_page-1)*per_page)
     end_index = (start_index+per_page)-1
 
+    if total_entry_count == 0
+      return 0..0
+    end
+
     if(start_index>(total_entry_count-1))
       start_index = total_entry_count-per_page
       end_index = total_entry_count-1
