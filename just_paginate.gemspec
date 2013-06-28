@@ -22,20 +22,6 @@ Gem::Specification.new do |s|
   # s.add_development_dependency "rspec"
 
   s.add_development_dependency "minitest"
-  if RUBY_VERSION.include?("1.8")
-    # We must force the use of older gems that are compatible with this older
-    # Ruby release.
-    # The newer versions of shoulda pull in shoulda-matchers 2.2.0, which has
-    # a hard dependency on Ruby 1.9.2.
-    s.add_development_dependency "shoulda", "~> 3.3.2"
-    # shoulda 3.3.2 depends on shoulda-matchers ~> 1.4.1, which in turn
-    # depends on activesupport >= 3.0.0. Now that Rails 4 is released, Bundler
-    # tries to pull in activesupport 4, which has a hard dependency on Ruby
-    # 1.9.3.
-    s.add_development_dependency "activesupport", "~> 3.0"
-  else
-    s.add_development_dependency "shoulda"
-  end
   s.add_development_dependency "shoulda-context"
   s.add_development_dependency "rake"
 end
