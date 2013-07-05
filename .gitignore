@@ -3,3 +3,5 @@
 Gemfile.lock
 pkg/*
 /.keeptesting
+coverage
+test/reports

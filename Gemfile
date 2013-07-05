@@ -1,4 +1,7 @@
 source "http://rubygems.org"
 
-# Specify your gem's dependencies in keeptesting.gemspec
 gemspec
+
+gem "ci_reporter"
+gem "rcov", :platforms => :ruby_18
+gem "simplecov", :platforms => :ruby_19
