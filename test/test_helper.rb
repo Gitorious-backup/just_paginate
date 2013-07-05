@@ -22,10 +22,5 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 #++
-if RUBY_VERSION > "1.9"
-  require "simplecov"
-  SimpleCov.start
-end
-
 require "bundler/setup"
 require "minitest/autorun"
