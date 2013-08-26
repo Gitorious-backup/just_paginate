@@ -85,6 +85,7 @@ module JustPaginate
     end
   end
 
+  # Depends on Bootstrap styling/widgets
   def self.page_links(curr_page, total_page_count, &page_link_constructor)
     page_labels(curr_page, total_page_count).map do |label|
       page_element = ""
@@ -103,6 +104,41 @@ module JustPaginate
           page_element = "<li class='active'><a>#{label}</a></li>"
         else
           page_element = "<li><a href='#{page_url}'>#{label}</a></li>"
+        end
+      end
+
+    end.join(" ")
+  end
+
+   # Not dependent on bootstrap styling/widgets
+  def self.page_navigation_non_bootstrap(curr_page, total_page_count, &page_link_constructor)
+    if total_page_count > 1
+      links = page_links_non_bootstrap(curr_page.to_i, total_page_count, &page_link_constructor)
+      return "<div class='pagination'>#{links}</div>"
+    else
+      ""
+    end
+  end
+
+  # Not dependent on bootstrap styling/widgets
+  def self.page_links_non_bootstrap(curr_page, total_page_count, &page_link_constructor)
+    page_labels(curr_page, total_page_count).map do |label|
+      page_element = ""
+
+      if label == "..."
+        page_element = "<span class='gap'>#{label}</span>"
+      elsif label == "<"
+        page_url = yield(curr_page-1)
+        page_element = "<a rel='prev' href='#{page_url}'>#{label}</a>"
+      elsif label == ">"
+        page_url = yield(curr_page+1)
+        page_element = "<a rel='next' href='#{page_url}'>#{label}</a>"
+      else
+        page_url = yield(label)
+        if label.to_i == curr_page
+          page_element = "<span class='current'>#{label}</span>"
+        else
+          page_element = "<a href='#{page_url}'>#{label}</a>"
         end
       end
 
