@@ -24,7 +24,7 @@
 #++
 module JustPaginate
 
-  VERSION = "0.1"
+  VERSION = "0.1.1"
 
   # TODO make sure negative numbers, non-integers etc are just converted to page 1.
   def self.page_value(page)
