@@ -94,10 +94,11 @@ describe JustPaginate do
     end
   end
 
-  it "just falls back to largest possible page if given page extends past collection bounds" do
+  it "raises exception when out of bounds" do
     assert_equal 2..3, JustPaginate.index_range(2,2,4)
-    assert_equal 2..3, JustPaginate.index_range(3,2,4)
-    assert_equal 2..3, JustPaginate.index_range(4,2,4)
+    assert_raises(RangeError) { JustPaginate.index_range(3,2,4) }
+    assert_raises(RangeError) { JustPaginate.index_range(4,2,4) }
+    assert_raises(RangeError) { JustPaginate.index_range(0,2,4) }
   end
 
   it "returns 0-0 range for empty collection" do

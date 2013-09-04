@@ -54,12 +54,12 @@ module JustPaginate
       return 0..0
     end
 
-    if(start_index>(total_entry_count-1))
-      start_index = total_entry_count-per_page
-      end_index = total_entry_count-1
+    if curr_page < 1 || start_index > (total_entry_count - 1)
+      page_count = (total_entry_count.to_f / per_page).ceil
+      raise RangeError.new("Page #{curr_page} is out of bounds from #{page_count} pages")
     end
 
-    if end_index>total_entry_count
+    if end_index > total_entry_count
       end_index = total_entry_count
     end
 
