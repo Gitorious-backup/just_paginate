@@ -99,10 +99,11 @@ describe JustPaginate do
     assert_raises(RangeError) { JustPaginate.index_range(3,2,4) }
     assert_raises(RangeError) { JustPaginate.index_range(4,2,4) }
     assert_raises(RangeError) { JustPaginate.index_range(0,2,4) }
+    assert_raises(RangeError) { JustPaginate.index_range(10,30,0) }
   end
 
-  it "returns 0-0 range for empty collection" do
-     assert_equal 0..0, JustPaginate.index_range(2,2,0)
+  it "returns 0-0 range for first page in empty collection" do
+     assert_equal 0..0, JustPaginate.index_range(1,2,0)
   end
 
   describe "The frontend pagination html helper" do

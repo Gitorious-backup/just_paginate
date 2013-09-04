@@ -23,8 +23,7 @@
 # SOFTWARE.
 #++
 module JustPaginate
-
-  VERSION = "0.2.0"
+  VERSION = "0.2.1"
 
   # TODO make sure negative numbers, non-integers etc are just converted to page 1.
   def self.page_value(page)
@@ -49,14 +48,16 @@ module JustPaginate
   def self.index_range(curr_page, per_page, total_entry_count)
     start_index = ((curr_page-1)*per_page)
     end_index = (start_index+per_page)-1
+    error_prefix = "Page #{curr_page} out of bounds"
 
     if total_entry_count == 0
+      raise RangeError.new("#{error_prefix}, collection has 0 entries") if start_index != 0
       return 0..0
     end
 
     if curr_page < 1 || start_index > (total_entry_count - 1)
       page_count = (total_entry_count.to_f / per_page).ceil
-      raise RangeError.new("Page #{curr_page} is out of bounds from #{page_count} pages")
+      raise RangeError.new("#{error_prefix} from #{page_count} pages")
     end
 
     if end_index > total_entry_count
