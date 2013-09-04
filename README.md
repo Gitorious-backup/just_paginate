@@ -6,7 +6,7 @@ just_paginate is a framework-agnostic approach to creating paginated
 webpages. It has no external dependencies and works with any web
 framework.
 
-Consists of two main methods, paginate and page_navigation. 
+Consists of two main methods, paginate and page_navigation.
 
 JustPaginate.paginate helps you slice up your collections and, given a
 page number, entities per page and totoal entity count, gives you the
@@ -37,21 +37,26 @@ Say we have a Rails app, with an index page of paginated Projects. You
 could do this in the controller, to select the 20 projects for the
 current page:
 
-    @page = JustPaginate.page_value(params[:page])
-    @project_count = Project.count
-    @projects, @total_pages = JustPaginate.paginate(@page, 20, @project_count) do |index_range|
-      Project.all.slice(index_range)
-    end
+```rb
+page = JustPaginate.page_value(params[:page])
+project_count = Project.count
+projects, total_pages = JustPaginate.paginate(page, 20, project_count) do |index_range|
+  Project.all.slice(index_range)
+end
+```
 
 And in the index.html.erb file, to generate the page navigation:
 
-    <%= JustPaginate.page_navigation(@page, @total_pages) { |page_no| "/projects/?page=#{page_no}" } -%>
-
+```erb
+<%= JustPaginate.page_navigation(page, total_pages) { |page_no| "/projects/?page=#{page_no}" } -%>
+```
 
 INSTALL:
 ========
 
-`sudo gem install just_paginate` 
+```sh
+sudo gem install just_paginate
+```
 
 Or simply stick just_paginate into your Gemfile and use Bundler to
 pull it down.
